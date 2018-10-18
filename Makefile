@@ -105,13 +105,11 @@ clean :
 	@echo "Files byte-compiled using $(EMACS)"
 
 %.generated.test: % $(ELC) refresh
-	@echo ====Indent $*====
-	touch $@
-	$(EMACS) --batch -q --no-site-file $(ENABLE_SMIE) \
+	@$(EMACS) --batch -q --no-site-file $(ENABLE_SMIE) \
 	  --load yuareg-site-file.el $< \
 	  --eval '(setq indent-tabs-mode nil)' \
 	  --eval '(defun ask-user-about-lock (file opponent) nil)' \
 	  --eval '(indent-region (point-min) (point-max) nil)' \
 	  --eval '(indent-region (point-min) (point-max) nil)' \
-	  --eval '(write-region (point-min) (point-max) "$(notdir $@)")'
-	$(DIFF) $< $@
+	  --eval '(write-region (point-min) (point-max) "$(notdir $@)")' 2>/dev/null
+	@$(DIFF) $< $@ || true
