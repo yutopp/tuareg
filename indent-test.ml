@@ -1388,6 +1388,16 @@ module MB = struct
     [@@v4]
   end
                 [@@m] (* TODO: fix *)
+
+  type t =
+    | T of a
+  [@@a]
+
+  type u =
+    | U of {
+      a: int
+    }
+  [@@a]
 end
 
 module a = struct

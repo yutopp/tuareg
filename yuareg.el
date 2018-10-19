@@ -1779,7 +1779,8 @@ Return values can be
     0)
    ((and (eq kind :before)
          (equal token "[") (smie-rule-next-p "@@")
-         (smie-rule-parent-p "d="))
+         (or (smie-rule-parent-p "d=")
+             (smie-rule-parent-p "of")))
     (let ((bs (smie-backward-sexp "type")))
       (pcase bs
         (`(,_ ,_ "type") (cons 'column (- (current-column) 5)))
