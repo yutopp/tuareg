@@ -7,3 +7,5 @@
 packages
 /yuareg.*/
 ChangeLog
+
+test/*.diff

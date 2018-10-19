@@ -51,14 +51,17 @@ install : $(INSTALL_FILES)
 uninstall :
 	$(EMACS) --batch --script script/uninstall.el $(DIST_NAME)
 
-.PHONY: refresh test
-refresh:
+.PHONY: test diff-test
+
 
 check : sample.ml.test
 
 test: indent-test
 
-indent-test: indent-test.ml.generated.test
+indent-test: diff-test
+
+diff-test:
+	$(MAKE) -C test
 
 yuareg-site-file.el: $(SOURCES)
 	(echo ";;; $@ --- Automatically extracted autoloads.";\
@@ -93,22 +96,10 @@ submit: $(TARBALL)
 clean :
 	$(RM) $(ELC) "$(DIST_NAME).tar.gz" "$(DIST_NAME).tar"
 	$(RM) -r yuareg.$(VERSION)
-	$(RM) *.generated.test
+	$(RM) test/*.generated.test
 
 .PHONY : all elc clean install uninstall check distrib dist submit
 
 %.elc : %.el
 	$(EMACS) --batch -L . --no-init-file -f batch-byte-compile $<
 	@echo "Files byte-compiled using $(EMACS)"
-
-%.generated.test: % $(ELC) refresh
-	@echo ====Indent $*====
-	-$(RM) $@
-	$(EMACS) --batch -q --no-site-file $(ENABLE_SMIE) \
-	  --load yuareg-site-file.el $< \
-	  --eval '(setq indent-tabs-mode nil)' \
-	  --eval '(defun ask-user-about-lock (file opponent) nil)' \
-	  --eval '(indent-region (point-min) (point-max) nil)' \
-	  --eval '(indent-region (point-min) (point-max) nil)' \
-	  --eval '(write-region (point-min) (point-max) "$@")'
-	$(DIFF) $< $@
