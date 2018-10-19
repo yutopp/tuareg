@@ -23,7 +23,7 @@ diff-test: $(TEST_DIFF)
 refresh:
 
 %.diff: %.generated.test
-	@$(DIFF) $* $< > $@ || true
+	@$(DIFF) $* $< > $@ || echo $@ "\n" "`cat $@`"
 
 %.generated.test: % refresh
 	@$(EMACS) --batch -q --no-site-file $(ENABLE_SMIE) \
