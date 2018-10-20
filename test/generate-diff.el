@@ -5,7 +5,7 @@
 (setq message-log-max nil)
 (defun ask-user-about-lock (file opponent) nil) ; Disable an interactive function
 
-(let* ((gen-file-suffix ".generated.test")
+(let* ((gen-file-suffix ".indented")
        (diff-file-suffix ".diff")
        (files (with-temp-buffer
                 (insert-file-contents "/dev/stdin")

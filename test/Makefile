@@ -2,7 +2,6 @@ EMACS ?= emacs
 DIFF ?= diff
 
 TESTS = $(wildcard *.ml)
-TEST_GENERATED = $(foreach x, $(TESTS), $(x).generated.test)
 TEST_DIFF = $(foreach x, $(TESTS), $(x).diff)
 
 diff-test: generate-diff $(TEST_DIFF)

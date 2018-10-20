@@ -95,7 +95,8 @@ submit: $(TARBALL)
 clean :
 	$(RM) $(ELC) "$(DIST_NAME).tar.gz" "$(DIST_NAME).tar"
 	$(RM) -r yuareg.$(VERSION)
-	$(RM) test/*.generated.test
+	$(RM) test/*.indented
+	$(RM) test/*.diff
 
 .PHONY : all elc clean install uninstall check distrib dist submit
 
