@@ -35,7 +35,6 @@ endif
 endif
 EMACS ?= emacs
 
-#ENABLE_SMIE = --eval '(setq yuareg-use-smie t)'
 RM ?= rm -f
 CP ?= cp -f
 LN = ln
