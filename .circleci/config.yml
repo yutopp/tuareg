@@ -17,4 +17,4 @@ jobs:
           command: make elc
       - run:
           name: Testing
-          command: make test
+          command: make test -j`nproc`
