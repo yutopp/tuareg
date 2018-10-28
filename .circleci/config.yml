@@ -18,7 +18,7 @@ jobs:
           command: make elc
       - run:
           name: Testing
-          command: make test
+          command: make test -j`nproc`
     docker:
       - image: silex/emacs:24.5-dev
   emacs25.1:
