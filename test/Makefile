@@ -1,5 +1,4 @@
 EMACS ?= emacs
-DIFF ?= diff
 
 TESTS = $(wildcard *.ml)
 TEST_DIFF = $(foreach x, $(TESTS), $(x).diff)
@@ -11,4 +10,4 @@ diff-test: generate-diff $(TEST_DIFF)
 
 generate-diff:
 	@echo $(TESTS) | \
-	  emacs --batch --quick --load ../yuareg-site-file.el --load script/generate-diff.el 2>/dev/null
+	  $(EMACS) --batch --quick --load ../yuareg-site-file.el --load script/generate-diff.el 2>/dev/null
