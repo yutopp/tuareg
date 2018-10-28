@@ -1,12 +1,13 @@
 version: 2
+workflows:
+  version: 2
+  test:
+    jobs:
+      - emacs24.5
+      - emacs25.1
+      - emacs26.1
 jobs:
-  build:
-    docker:
-      - image: silex/emacs:24.3-dev
-      - image: silex/emacs:24.4-dev
-      - image: silex/emacs:24.5-dev
-      - image: silex/emacs:25.1-dev
-      - image: silex/emacs:26.1-dev
+  emacs24.5: &test-body
     steps:
       - checkout
       - run:
@@ -18,3 +19,13 @@ jobs:
       - run:
           name: Testing
           command: make test -j`nproc`
+    docker:
+      - image: silex/emacs:24.5-dev
+  emacs25.1:
+    <<: *test-body
+    docker:
+      - image: silex/emacs:25.1-dev
+  emacs26.1:
+    <<: *test-body
+    docker:
+      - image: silex/emacs:26.1-dev
