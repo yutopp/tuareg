@@ -21,4 +21,4 @@ diff-test: generate-diff $(TEST_DIFF)
 
 generate-diff:
 	@echo $(TESTS) | \
-	  emacs --batch --quick --load ../yuareg-site-file.el --load generate-diff.el 2>/dev/null
+	  emacs --batch --quick --load ../yuareg-site-file.el --load script/generate-diff.el 2>/dev/null
