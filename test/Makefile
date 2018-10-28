@@ -4,6 +4,8 @@ DIFF ?= diff
 TESTS = $(wildcard *.ml)
 TEST_DIFF = $(foreach x, $(TESTS), $(x).diff)
 
+.PHONY: generate-diff diff-test
+
 diff-test: generate-diff $(TEST_DIFF)
 	@fail=0; \
 	success=0; \
@@ -16,8 +18,6 @@ diff-test: generate-diff $(TEST_DIFF)
 	done;                       \
 	echo "total: " `expr $$fail + $$success` " success: " $${success} " failed: " $${fail}; \
 	if [ -z $${fail} ]; then return 0; else return 1; fi
-
-.PHONY: generate-diff
 
 generate-diff:
 	@echo $(TESTS) | \
